@@ -1,4 +1,4 @@
-package ir.maktabsharif.dao;
+package ir.maktabsharif.dao.BaseModel;
 
 
 import jakarta.persistence.GeneratedValue;

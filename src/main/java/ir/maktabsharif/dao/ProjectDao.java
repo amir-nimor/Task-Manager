@@ -1,6 +1,9 @@
 package ir.maktabsharif.dao;
 
+import ir.maktabsharif.dao.BaseModel.BaseModel;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.*;
 
@@ -12,8 +15,12 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class Project extends BaseModel<Integer>{
+public class ProjectDao extends BaseModel<Integer> {
 
+    @Column(nullable = false)
     private String name;
+
+    @Lob
+    @Column(nullable = false)
     private String description;
 }

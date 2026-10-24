@@ -1,5 +1,6 @@
 package ir.maktabsharif.dao;
 
+import ir.maktabsharif.dao.BaseModel.BaseModel;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -11,7 +12,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-public class Task extends BaseModel<Long>{
+public class TaskDao extends BaseModel<Long> {
 
     @Column(nullable = false)
     private String title;
@@ -23,6 +24,6 @@ public class Task extends BaseModel<Long>{
     private UserDao userDao;
 
     @ManyToOne
-    private Project project;
+    private ProjectDao projectDao;
 
 }

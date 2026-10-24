@@ -1,4 +1,4 @@
-package ir.maktabsharif.dao;
+package ir.maktabsharif.dao.enums;
 
 public enum Rols {
 
