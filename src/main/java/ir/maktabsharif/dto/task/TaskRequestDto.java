@@ -9,7 +9,7 @@ import lombok.Setter;
 @Builder
 public class TaskRequestDto {
 
-
+    private Long id;
     private String title;
 
     private Integer estimatedMinutes;

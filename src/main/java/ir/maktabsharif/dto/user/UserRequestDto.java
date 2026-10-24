@@ -8,8 +8,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class UserRequesrDto {
+public class UserRequestDto {
 
+    private Integer id;
     private String name;
     private String email;
     private Rols rols;

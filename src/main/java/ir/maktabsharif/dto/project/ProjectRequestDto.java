@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ProjectRequestDto {
-
+    private Integer id;
     private String name;
     private String description;
 }
