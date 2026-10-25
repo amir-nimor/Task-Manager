@@ -86,8 +86,24 @@ public class TaskServiceImpl implements TaskService{
                 taskResponseDtos.add(commandable.daoToResponse(u));
             }
             return taskResponseDtos;
-        }catch (ValidationException | RepositoryException e){
+        }catch (RepositoryException e){
             throw new ServiceException("your operation is failed => "+e.getMessage());
         }
     }
+
+    @Override
+    public List<TaskResponseDto> findByAssignedId(Integer id) {
+        try {
+            List<TaskDao> taskDaos =  taskRepository.findByAssignedId(id);
+            List<TaskResponseDto> taskResponseDtos = new ArrayList<>();
+            for (TaskDao u : taskDaos){
+                taskResponseDtos.add(commandable.daoToResponse(u));
+            }
+            return taskResponseDtos;
+        }catch (RepositoryException e){
+            throw new ServiceException("your operation is failed => "+e.getMessage());
+        }
+    }
+
+
 }

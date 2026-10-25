@@ -2,9 +2,15 @@ package ir.maktabsharif.repository.task;
 
 import ir.maktabsharif.dao.BaseModel.BaseModel;
 import ir.maktabsharif.dao.TaskDao;
+import ir.maktabsharif.dto.task.TaskResponseDto;
+import ir.maktabsharif.exception.HibernateException;
+import ir.maktabsharif.exception.RepositoryException;
 import ir.maktabsharif.repository.base.BaseRepositoryImpl;
+import ir.maktabsharif.util.HibernateUtil;
 
-public class TaskRepositoryImpl extends BaseRepositoryImpl<TaskDao,Long> implements TaskRepository {
+import java.util.List;
+
+public class TaskRepositoryImpl extends BaseRepositoryImpl<TaskDao, Long> implements TaskRepository {
 
     public TaskRepositoryImpl() {
         super(TaskDao.class);
@@ -17,4 +23,18 @@ public class TaskRepositoryImpl extends BaseRepositoryImpl<TaskDao,Long> impleme
         dbEntity.setUserDao(newEntity.getUserDao());
         dbEntity.setEstimatedMinutes(newEntity.getEstimatedMinutes());
     }
+
+    @Override
+    public List<TaskDao> findByAssignedId(Integer id) {
+        try {
+            return HibernateUtil.read(em -> {
+                return em.createQuery("FROM TaskDao t where t.userDao.id = ?1")
+                        .setParameter(1, id)
+                        .getResultList();
+            });
+        } catch (HibernateException e) {
+            throw new RepositoryException("you is user not founded = " + e.getMessage());
+        }
+    }
+
 }

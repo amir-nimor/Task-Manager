@@ -12,10 +12,10 @@ public class TaskRequestDto {
     private Long id;
     private String title;
 
-    private Integer estimatedMinutes;
 
     private Integer userId;
 
     private Integer projectId;
+    private Integer estimatedMinutes;
 
 }

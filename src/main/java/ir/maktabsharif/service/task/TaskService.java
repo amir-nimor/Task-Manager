@@ -15,6 +15,6 @@ public interface TaskService {
     TaskResponseDto findById(Long id);
     List<TaskResponseDto> findAll();
 
-
+    List<TaskResponseDto> findByAssignedId(Integer id);
 
 }
