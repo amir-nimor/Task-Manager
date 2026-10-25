@@ -11,20 +11,19 @@
     <title>Update Successfully</title>
 </head>
 <body>
-<%
-    TaskResponseDto task =(TaskResponseDto) request.getAttribute("Task");
-%>
+
 
 <%
     HttpSession session1 = request.getSession();
     Integer visiteCount = (Integer) session1.getAttribute("visitCount");
+    TaskResponseDto taskResponseDto = (TaskResponseDto) session1.getAttribute("taskResponseDto");
 %>
 
 <h2>your visite site = <%=visiteCount%></h2>
 
 <h1>Update Successfully</h1>
 
-<h2><%=task%></h2>
+<h2><%=taskResponseDto%></h2>
 
 
 

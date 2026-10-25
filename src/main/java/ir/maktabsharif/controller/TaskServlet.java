@@ -1,5 +1,6 @@
 package ir.maktabsharif.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.maktabsharif.dto.task.TaskRequestDto;
 import ir.maktabsharif.dto.task.TaskResponseDto;
 import ir.maktabsharif.service.task.TaskServiceImpl;
@@ -9,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,11 +20,13 @@ import java.util.List;
 public class TaskServlet extends HttpServlet {
 
     private TaskServiceImpl taskService;
+    private ObjectMapper objectMapper;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         this.taskService = (TaskServiceImpl) getServletContext().getAttribute("taskService");
+        this.objectMapper = (ObjectMapper) getServletContext().getAttribute("objectMapper");
     }
 
     @Override
@@ -63,26 +67,23 @@ public class TaskServlet extends HttpServlet {
         req.getRequestDispatcher("./page/ShowTasks.jsp").forward(req, resp);
     }
 
+
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
-        String title = req.getParameter("title");
-        Integer estimatedMinutes =Integer.parseInt(req.getParameter("estimatedMinutes"));
-        Integer projectId =Integer.parseInt(req.getParameter("projectId"));
-        Integer userId =Integer.parseInt(req.getParameter("userId"));
 
-        TaskRequestDto taskRequestDto = TaskRequestDto.builder()
-                .estimatedMinutes(estimatedMinutes)
-                .title(title)
-                .userId(userId)
-                .projectId(projectId)
-                .id(id)
-                .build();
-
-        TaskResponseDto taskResponseDto = taskService.update(id,taskRequestDto);
-        req.setAttribute("Task",taskResponseDto);
-        req.getRequestDispatcher("/sucsesfully/UpdateSucsesfully.jsp").forward(req,resp);
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        HttpSession session = req.getSession(false);
+        TaskRequestDto taskRequestDto = objectMapper.readValue(req.getReader(),TaskRequestDto.class);
+
+        TaskResponseDto taskResponseDto = taskService.update(taskRequestDto.getId(),taskRequestDto);
+        req.setAttribute("Task",taskResponseDto);
+        session.setAttribute("taskResponseDto",taskResponseDto);
+        objectMapper.writeValue(resp.getWriter(),taskResponseDto);
+
+    }
 }

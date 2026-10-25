@@ -1,5 +1,6 @@
 package ir.maktabsharif.controller.lisener;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import ir.maktabsharif.dao.enums.Rols;
 import ir.maktabsharif.dto.project.ProjectRequestDto;
 import ir.maktabsharif.dto.project.ProjectResponseDto;
@@ -79,7 +80,9 @@ public class Start implements ServletContextListener {
 //        taskService.save(taskRequestDto6);
 //        taskService.save(taskRequestDto7);
 
+        ObjectMapper objectMapper = new ObjectMapper();
 
+        sce.getServletContext().setAttribute("objectMapper",objectMapper);
         sce.getServletContext().setAttribute("userService",userService);
         sce.getServletContext().setAttribute("projectService",projectService);
         sce.getServletContext().setAttribute("taskService",taskService);
