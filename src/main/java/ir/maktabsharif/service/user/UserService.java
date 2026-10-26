@@ -1,5 +1,6 @@
 package ir.maktabsharif.service.user;
 
+import ir.maktabsharif.dao.UserDao;
 import ir.maktabsharif.dto.user.UserRequestDto;
 import ir.maktabsharif.dto.user.UserResponseDto;
 
@@ -12,6 +13,6 @@ public interface UserService {
     Integer delete(Integer id);
     UserResponseDto findById(Integer id);
     List<UserResponseDto> findAll();
-
+    UserResponseDto findBuEmail(String email);
 
 }

@@ -14,32 +14,32 @@ import ir.maktabsharif.util.Ruls;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;
     private UserCommand commandable;
 
-    public UserServiceImpl(UserRepository userRepository){
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.commandable = new UserCommand();
     }
 
 
-    private void validation(UserRequestDto userRequestDto){
-        Ruls.check(userRequestDto.getEmail().isBlank(),"your email is empty");
-        Ruls.check(userRequestDto.getName().isBlank(),"your name is empty");
+    private void validation(UserRequestDto userRequestDto) {
+        Ruls.check(userRequestDto.getEmail().isBlank(), "your email is empty");
+        Ruls.check(userRequestDto.getName().isBlank(), "your name is empty");
     }
 
     @Override
     public UserResponseDto save(UserRequestDto userRequesrDto) {
-       try {
-           validation(userRequesrDto);
-           UserDao userDao = commandable.requestToDao(userRequesrDto);
-           return commandable.daoToResponse(userRepository.create(userDao));
-       }catch (ValidationException | RepositoryException e){
-           throw new ServiceException("your operation is failed => "+e.getMessage());
-       }
+        try {
+            validation(userRequesrDto);
+            UserDao userDao = commandable.requestToDao(userRequesrDto);
+            return commandable.daoToResponse(userRepository.create(userDao));
+        } catch (ValidationException | RepositoryException e) {
+            throw new ServiceException("your operation is failed => " + e.getMessage());
+        }
     }
 
     @Override
@@ -47,9 +47,9 @@ public class UserServiceImpl implements UserService{
         try {
             validation(userRequesrDto);
             UserDao userDao = commandable.requestToDao(userRequesrDto);
-            return commandable.daoToResponse(userRepository.update(id,userDao));
-        }catch (ValidationException | RepositoryException e){
-            throw new ServiceException("your operation is failed => "+e.getMessage());
+            return commandable.daoToResponse(userRepository.update(id, userDao));
+        } catch (ValidationException | RepositoryException e) {
+            throw new ServiceException("your operation is failed => " + e.getMessage());
         }
     }
 
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService{
     public Integer delete(Integer id) {
         try {
             return userRepository.delete(id);
-        }catch (RepositoryException e){
-            throw new ServiceException("your operation is failed => "+e.getMessage());
+        } catch (RepositoryException e) {
+            throw new ServiceException("your operation is failed => " + e.getMessage());
         }
     }
 
@@ -66,22 +66,31 @@ public class UserServiceImpl implements UserService{
     public UserResponseDto findById(Integer id) {
         try {
             return commandable.daoToResponse(userRepository.read(id));
-        }catch (RepositoryException e){
-            throw new ServiceException("your operation is failed => "+e.getMessage());
+        } catch (RepositoryException e) {
+            throw new ServiceException("your operation is failed => " + e.getMessage());
         }
     }
 
     @Override
     public List<UserResponseDto> findAll() {
         try {
-            List<UserDao> userDaos =  userRepository.findAll();
+            List<UserDao> userDaos = userRepository.findAll();
             List<UserResponseDto> userResponseDtos = new ArrayList<>();
-            for (UserDao u : userDaos){
+            for (UserDao u : userDaos) {
                 userResponseDtos.add(commandable.daoToResponse(u));
             }
             return userResponseDtos;
-        }catch (ValidationException | RepositoryException e){
-            throw new ServiceException("your operation is failed => "+e.getMessage());
+        } catch (ValidationException | RepositoryException e) {
+            throw new ServiceException("your operation is failed => " + e.getMessage());
+        }
+    }
+
+    @Override
+    public UserResponseDto findBuEmail(String email) {
+        try {
+            return commandable.daoToResponse(userRepository.findBuEmail(email));
+        } catch (RepositoryException e) {
+            throw new ServiceException(e.getMessage());
         }
     }
 }

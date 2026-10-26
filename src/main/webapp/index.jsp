@@ -11,9 +11,16 @@
 
 
 <a href="Task" >tasks</a><br>
-<a href="./page/ShowMyTasks.jsp" >tasks</a><br>
+<a href="./page/ShowMyTasks.jsp" >my tasks</a><br>
+<a href="Task/Add" >Add tasks</a><br>
+<a href="users" >Show All users</a><br>
+<a href="projects" >Show All project</a><br>
+<a href="register/CreateUser.jsp" >register user</a><br>
+<a href="register/Login.jsp" >Login user</a><br>
+<a href="projects/Add" >Add Project</a><br>
+<a href="Register" >log out</a><br>
 
-<a href="./">home</a>
+
 
 </body>
 </html>

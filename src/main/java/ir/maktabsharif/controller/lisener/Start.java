@@ -35,16 +35,16 @@ public class Start implements ServletContextListener {
         ProjectServiceImpl projectService = new ProjectServiceImpl(projectRepository);
 
 
-//        UserRequestDto userRequestDto1 = UserRequestDto.builder().email("amir@gamli").name("amir").rols(Rols.USER).build();
-//        UserRequestDto userRequestDto2 = UserRequestDto.builder().email("ali@gamli").name("ali").rols(Rols.USER).build();
-//        UserRequestDto userRequestDto3 = UserRequestDto.builder().email("reza@gamli").name("reza").rols(Rols.USER).build();
-//        UserRequestDto userRequestDto4 = UserRequestDto.builder().email("john@gamli").name("john").rols(Rols.USER).build();
-//
-//        ProjectRequestDto projectRequestDto1 = ProjectRequestDto.builder().name("java").description("project a hw 32").build();
-//        ProjectRequestDto projectRequestDto2 = ProjectRequestDto.builder().name("python").description("project a hw 32").build();
-//        ProjectRequestDto projectRequestDto3 = ProjectRequestDto.builder().name("c").description("project a hw 32").build();
-//
-//
+        UserRequestDto userRequestDto1 = UserRequestDto.builder().email("amir@gamli").name("amir").rols(Rols.USER).build();
+        UserRequestDto userRequestDto2 = UserRequestDto.builder().email("ali@gamli").name("ali").rols(Rols.USER).build();
+        UserRequestDto userRequestDto3 = UserRequestDto.builder().email("reza@gamli").name("reza").rols(Rols.USER).build();
+        UserRequestDto userRequestDto4 = UserRequestDto.builder().email("john@gamli").name("john").rols(Rols.USER).build();
+
+        ProjectRequestDto projectRequestDto1 = ProjectRequestDto.builder().name("java").description("project a hw 32").build();
+        ProjectRequestDto projectRequestDto2 = ProjectRequestDto.builder().name("python").description("project a hw 32").build();
+        ProjectRequestDto projectRequestDto3 = ProjectRequestDto.builder().name("c").description("project a hw 32").build();
+
+
 //        UserResponseDto userResponseDto1 = userService.save(userRequestDto1);
 //        UserResponseDto userResponseDto2 = userService.save(userRequestDto2);
 //        UserResponseDto userResponseDto3 = userService.save(userRequestDto3);

@@ -8,5 +8,5 @@ import java.util.List;
 
 public interface UserRepository extends BaseRepository<UserDao,Integer> {
 
-
+    UserDao findBuEmail(String email);
 }

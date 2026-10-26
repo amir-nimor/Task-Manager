@@ -37,7 +37,7 @@
     </form>
 
     <form action="Task/delete"
-          method="post"
+          method="get"
           style="display: inline;">
 
         <input type="hidden" name="id" value="<%=t.getId()%>">

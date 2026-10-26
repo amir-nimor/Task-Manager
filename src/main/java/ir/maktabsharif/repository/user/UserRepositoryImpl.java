@@ -9,7 +9,7 @@ import ir.maktabsharif.util.HibernateUtil;
 
 import java.util.List;
 
-public class UserRepositoryImpl extends BaseRepositoryImpl<UserDao,Integer> implements UserRepository {
+public class UserRepositoryImpl extends BaseRepositoryImpl<UserDao, Integer> implements UserRepository {
 
     public UserRepositoryImpl() {
         super(UserDao.class);
@@ -23,4 +23,16 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<UserDao,Integer> impl
     }
 
 
+    @Override
+    public UserDao findBuEmail(String email) {
+        try {
+            return HibernateUtil.read(em -> {
+                return em.createQuery("from UserDao u where u.email = ?1", UserDao.class)
+                        .setParameter(1, email)
+                        .getSingleResult();
+            });
+        } catch (HibernateException e) {
+            throw new RepositoryException("your email not founded => "+e.getMessage());
+        }
+    }
 }
